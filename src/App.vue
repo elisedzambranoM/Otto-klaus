@@ -2,18 +2,12 @@
   <v-app>
     <v-app-bar app color="accent" dark>
       <div class="d-flex align-center"></div>
-
       <v-spacer></v-spacer>
-
-      <v-btn
-        @click="logout"
-         text
-      >
+      <v-btn v-if="currentUser" @click="logout" text>
         <span class="mr-2">Cerrar Sesión</span>
         <v-icon>mdi-lock-open</v-icon>
       </v-btn>
     </v-app-bar>
-
     <v-main>
       <loginPage />
     </v-main>
@@ -22,7 +16,8 @@
 
 <script>
 import loginPage from "./components/loginPage";
-import firebase from "firebase"
+import firebase from "firebase";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "App",
@@ -32,19 +27,24 @@ export default {
   },
 
   methods: {
+    ...mapActions(["updateCurrentUser"]),
     logout() {
       firebase
         .auth()
         .signOut()
-        .then(function() {
+        .then(() => {
           // Sign-out successful.
-          console.log("Sign-out successful")
+          this.updateCurrentUser(null);
+          console.log("Sign-out successful");
         })
-        .catch(function(error) {
+        .catch((error) => {
           // An error happened.
-          console.log(error)
+          console.log(error);
         });
     },
+  },
+  computed:{
+    ...mapState(["currentUser"]),
   },
 };
 </script>

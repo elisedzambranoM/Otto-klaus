@@ -28,25 +28,32 @@
 
 <script>
 import firebase from "firebase";
-//import firebaseui from "firebaseui"
+import {mapActions} from "vuex"
 
 export default {
   name: "loginPage",
+ 
 
   methods: {
+    ...mapActions(["updateCurrentUser"]),
     signIn() {
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(function(result) {
-          console.log(result)
+        .then((result) => {
+          const {
+            user
+          } = result
+          const {
+           displayName, email
+          } = user
+          this.updateCurrentUser({displayName, email})
+         console.log(displayName, email)
         })
-        .catch(function(error) {
+        .catch((error) => {
          console.log(error)
         });
-      console.log(provider);
-      console.log("logueado");
     },
   },
 };
