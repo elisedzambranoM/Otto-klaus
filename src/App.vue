@@ -1,20 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="accent"
-      dark
-    >
-      <div class="d-flex align-center">
-        
-      </div>
+    <v-app-bar app color="accent" dark>
+      <div class="d-flex align-center"></div>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+        @click="logout"
+         text
       >
         <span class="mr-2">Cerrar Sesión</span>
         <v-icon>mdi-lock-open</v-icon>
@@ -22,23 +15,36 @@
     </v-app-bar>
 
     <v-main>
-      <loginPage/>
+      <loginPage />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import loginPage from './components/loginPage';
+import loginPage from "./components/loginPage";
+import firebase from "firebase"
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     loginPage,
   },
 
-  data: () => ({
-    //
-  }),
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          // Sign-out successful.
+          console.log("Sign-out successful")
+        })
+        .catch(function(error) {
+          // An error happened.
+          console.log(error)
+        });
+    },
+  },
 };
 </script>
