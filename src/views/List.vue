@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h1>This is an list page</h1>
+    <tableToys></tableToys>
   </div>
 </template>
 
 
 <script>
+import tableToys from '../components/tableToys.vue'
 export default {
    name: "list",
    
+  components: { tableToys },
 }
 </script>
