@@ -49,6 +49,8 @@ export default {
            displayName, email
           } = user
           this.updateCurrentUser({displayName, email})
+          this.$router.push("/list");
+          
          console.log(displayName, email)
         })
         .catch((error) => {

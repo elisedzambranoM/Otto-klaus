@@ -9,13 +9,13 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      <loginPage />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import loginPage from "./components/loginPage";
+
 import firebase from "firebase";
 import { mapActions, mapState } from "vuex";
 
@@ -23,7 +23,7 @@ export default {
   name: "App",
 
   components: {
-    loginPage,
+    
   },
 
   methods: {
@@ -35,6 +35,7 @@ export default {
         .then(() => {
           // Sign-out successful.
           this.updateCurrentUser(null);
+          this.$router.push("/");
           console.log("Sign-out successful");
         })
         .catch((error) => {
