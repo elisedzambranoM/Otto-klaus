@@ -33,7 +33,7 @@
           <td>{{ item.data.stock }}</td>
           <td>{{ item.data.price }}</td>
           <td>
-            <v-btn color="success">
+            <v-btn color="success" @click.prevent="editToys(item)">
               Editar
             </v-btn>
           </td>
@@ -50,16 +50,21 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex';
 export default {
   name: "tableToys",
 
   data() {
     return {
       toysItems: null,
+      
     };
   },
    created(){
      this.getToys()
+  },
+  computed:{
+  ...mapState(["toy"]),
   },
   methods:{
     getToys(){
@@ -72,6 +77,15 @@ export default {
         this.getToys()
         console.log(response)
       })
+    },
+    editToys(item){
+      console.log("tabla", item)
+      const {
+        code, name, price, stock,
+      } = item.data
+      this.$router.push({name: "editToy", params: {
+        code, name, price, stock, id: item.id
+      } })
     }
   }
 

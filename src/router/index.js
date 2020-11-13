@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import List from '../views/List.vue'
 import newToy from '../views/newToy.vue'
-
+import editToy from '../views/editToy.vue'
 
 
 Vue.use(VueRouter)
@@ -29,6 +29,12 @@ const routes = [
     name: 'NewToy',
     component: newToy,
     alias: ["/newToy"]
+  },
+  {
+    path: '/editToy',
+    name: 'editToy',
+    component: editToy,
+    alias: ["/editToy"]
   },
 ]
 
