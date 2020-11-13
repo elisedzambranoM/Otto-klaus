@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import List from '../views/List.vue'
+import newToy from '../views/newToy.vue'
 
 
 
@@ -22,6 +23,12 @@ const routes = [
     name: 'List',
     component: List,
     alias: ["/list"]
+  },
+  {
+    path: '/newToy',
+    name: 'NewToy',
+    component: newToy,
+    alias: ["/newToy"]
   },
 ]
 

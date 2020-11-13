@@ -25,9 +25,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in desserts" :key="item.name">
-          <td>{{ item.name }}</td>
-          <td>{{ item.calories }}</td>
+        <tr v-for="item in toysItems" :key="item.id">
+          <td>{{ item.codigo }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.stock }}</td>
+          <td>{{ item.precio }}</td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -37,6 +39,26 @@
 <script>
 export default {
   name: "table",
+
+  data (){
+    return{
+      toysItems: [
+        {
+        codigo: "A0001",
+        nombre: "Ironman",
+        stock: 100,
+        precio: 20000,
+        },
+        {
+        codigo: "A0002",
+        nombre: "Wonder woman",
+        stock: 100,
+        precio: 20000,
+        },
+        
+      ]
+    }
+  }
 };
 </script>
 
