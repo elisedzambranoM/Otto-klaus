@@ -3,15 +3,15 @@
     <v-row class="text-center">
       <v-col class="mb-4">
         <h1 class="display-2 mb-3">
-          Listado de Juguetes
+          Lista de Juguetes
         </h1>
       </v-col>
     </v-row>
-    <v-simple-table>
+    <v-simple-table class="d-flex justify-center">
       <thead>
         <tr>
           <th class="text-left">
-           Código
+            Código
           </th>
           <th class="text-left">
             Nombre
@@ -22,6 +22,8 @@
           <th class="text-left">
             Precio
           </th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +32,16 @@
           <td>{{ item.nombre }}</td>
           <td>{{ item.stock }}</td>
           <td>{{ item.precio }}</td>
+          <td>
+            <v-btn color="success">
+              Editar
+            </v-btn>
+          </td>
+          <td>
+            <v-btn color="warning">
+              Eliminar
+            </v-btn>
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -40,25 +52,24 @@
 export default {
   name: "table",
 
-  data (){
-    return{
+  data() {
+    return {
       toysItems: [
         {
-        codigo: "A0001",
-        nombre: "Ironman",
-        stock: 100,
-        precio: 20000,
+          codigo: "A0001",
+          nombre: "Ironman",
+          stock: 100,
+          precio: 20000,
         },
         {
-        codigo: "A0002",
-        nombre: "Wonder woman",
-        stock: 100,
-        precio: 20000,
+          codigo: "A0002",
+          nombre: "Wonder woman",
+          stock: 100,
+          precio: 20000,
         },
-        
-      ]
-    }
-  }
+      ],
+    };
+  },
 };
 </script>
 
