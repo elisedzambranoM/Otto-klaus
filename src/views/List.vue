@@ -23,6 +23,8 @@ export default {
     goToCreate (){
       this.$router.push("/newToy")
     }
-  }
+  },
+ 
+  
 }
 </script>

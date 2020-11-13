@@ -10,10 +10,10 @@
       </v-row>
       <v-row class="d-flex justify-center">
         <v-col cols="12" sm="6" md="3">
-          <v-text-field label="Código"></v-text-field>
-          <v-text-field label="Nombre del Producto"></v-text-field>
-          <v-text-field label="Stock"></v-text-field>
-          <v-text-field label="Precio"></v-text-field>
+          <v-text-field label="Código" v-model="newToy.code"></v-text-field>
+          <v-text-field label="Nombre del Producto" v-model="newToy.name"></v-text-field>
+          <v-text-field label="Stock" v-model="newToy.stock"></v-text-field>
+          <v-text-field label="Precio" v-model="newToy.price"></v-text-field>
           <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="290">
               <template v-slot:activator="{ on, attrs }">
@@ -42,7 +42,7 @@
                   <v-btn color="green darken-1" text @click="saveToys">
                     Aceptar
                   </v-btn>
-                  <v-btn color="green darken-1" text @click="dialog = false">
+                  <v-btn color="green darken-1" text @click="resetForm">
                     Cancelar
                   </v-btn>
                 </v-card-actions>
@@ -56,12 +56,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "newToy",
 
   data() {
     return {
       dialog: false,
+      newToy: {
+          code: null,
+
+      }
     };
   },
 
@@ -70,8 +75,22 @@ export default {
       this.$router.push("/list");
     },
     saveToys(){
-        console.log("aqui conectar con api")
+        console.log(this.newToy.code)
+        console.log(this.newToy.name)
+        console.log(this.newToy.stock)
+        console.log(this.newToy.price)
+        this.dialog = false
+        axios.post(`https://us-central1-ottoklauss-5927c.cloudfunctions.net/api/toys`, this.newToy).then((response) =>{
+        console.log(response)
         this.$router.push("/list");
+        })
+    },
+    resetForm(){
+        this.newToy.code = null
+        this.newToy.name = null
+        this.newToy.stock = null
+        this.newToy.price = null
+         this.dialog = false
     }
   },
 };

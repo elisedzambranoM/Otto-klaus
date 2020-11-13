@@ -28,17 +28,17 @@
       </thead>
       <tbody>
         <tr v-for="item in toysItems" :key="item.id">
-          <td>{{ item.codigo }}</td>
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.stock }}</td>
-          <td>{{ item.precio }}</td>
+          <td>{{ item.data.code }}</td>
+          <td>{{ item.data.name }}</td>
+          <td>{{ item.data.stock }}</td>
+          <td>{{ item.data.price }}</td>
           <td>
             <v-btn color="success">
               Editar
             </v-btn>
           </td>
           <td>
-            <v-btn color="warning">
+            <v-btn color="warning" @click.prevent="deleteItem(item.id)">
               Eliminar
             </v-btn>
           </td>
@@ -49,27 +49,32 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: "table",
+  name: "tableToys",
 
   data() {
     return {
-      toysItems: [
-        {
-          codigo: "A0001",
-          nombre: "Ironman",
-          stock: 100,
-          precio: 20000,
-        },
-        {
-          codigo: "A0002",
-          nombre: "Wonder woman",
-          stock: 100,
-          precio: 20000,
-        },
-      ],
+      toysItems: null,
     };
   },
+   created(){
+     this.getToys()
+  },
+  methods:{
+    getToys(){
+      axios.get(`https://us-central1-ottoklauss-5927c.cloudfunctions.net/api/toys`).then(response =>{
+       this.toysItems = response.data
+     })
+    },
+    deleteItem(idToy){
+      axios.delete(`https://us-central1-ottoklauss-5927c.cloudfunctions.net/api/toys/${idToy}`).then(response => {
+        this.getToys()
+        console.log(response)
+      })
+    }
+  }
+
 };
 </script>
 
