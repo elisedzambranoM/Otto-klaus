@@ -84,11 +84,7 @@ export default {
         })
     },
     resetForm(){
-        this.newToy.code = null
-        this.newToy.name = null
-        this.newToy.stock = null
-        this.newToy.price = null
-        this.dialog = false
+    this.dialog = false
     }
   },
   created(){
